@@ -1,0 +1,21 @@
+{
+  "name": "iskcon-event-notification-system",
+  "version": "1.0.0",
+  "description": "User Interest-Based Event Email Notification System (ISKCON Edition)",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "seed": "node scripts/seedData.js",
+    "notify": "node scripts/sendNotifications.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-validator": "^7.2.1",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^7.8.7",
+    "nodemailer": "^7.0.6"
+  }
+}

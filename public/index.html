@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ISKCON Event Notification System</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div id="header">
+        <div class="wrapper">
+            <div class="logo">
+                <img src="images/iskcon-logo.svg" alt="ISKCON Logo">
+                <h1>ISKCON Event Notification System</h1>
+            </div>
+            <div class="navigation">
+                <ul>
+                    <li><a href="#" class="active">Events</a></li>
+                    <li><a href="#" id="matches-nav">My Matches</a></li>
+                    <li><a href="#" id="subscribe-nav">Subscribe</a></li>
+                    <li><a href="#" id="send-mail-nav">Send Mail</a></li>
+                    <li><a href="#" id="about-nav">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="content">
+        <div class="banner">
+            <div class="wrapper">
+                <h2>Upcoming ISKCON Events</h2>
+                <p>Stay connected with the latest events and activities at ISKCON</p>
+            </div>
+        </div>
+
+        <div class="filters wrapper">
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="Search events...">
+                <button id="search-btn">Search</button>
+            </div>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-category="all">All</button>
+                <button class="filter-btn" data-category="festival">Festivals</button>
+                <button class="filter-btn" data-category="kirtan">Kirtan</button>
+                <button class="filter-btn" data-category="bhagavad-gita">Bhagavad Gita</button>
+                <button class="filter-btn" data-category="philosophy">Philosophy</button>
+                <button class="filter-btn" data-category="prasadam">Prasadam</button>
+            </div>
+        </div>
+
+        <div class="events-list wrapper">
+            <div id="events-container" class="events-grid">
+                <!-- Events will be loaded here dynamically -->
+                <div class="loading-message">
+                    <p>Loading events...</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="subscribe-section" class="subscribe-area wrapper hidden">
+            <h2>Subscribe to Event Notifications</h2>
+            <p>Get personalized notifications about upcoming events based on your interests.</p>
+            <form id="subscribe-form">
+                <div class="form-row">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-row">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-row">
+                    <label>Interests:</label>
+                    <div class="interest-options">
+                        <label><input type="checkbox" name="interests" value="festival"> Festivals</label>
+                        <label><input type="checkbox" name="interests" value="kirtan"> Kirtan</label>
+                        <label><input type="checkbox" name="interests" value="bhagavad-gita"> Bhagavad Gita</label>
+                        <label><input type="checkbox" name="interests" value="philosophy"> Philosophy</label>
+                        <label><input type="checkbox" name="interests" value="prasadam"> Prasadam</label>
+                    </div>
+                </div>
+                <button type="submit" class="submit-btn">Subscribe</button>
+            </form>
+        </div>
+        
+        <div id="notify-section" class="notify-area wrapper hidden">
+            <h2>Send Event Notifications</h2>
+            <p>Quickly notify users about upcoming events</p>
+            <div id="notification-message" class="notification-message" style="display: none;"></div>
+            <form id="notification-form">
+                <div class="form-row">
+                    <label for="event-title">Event Title:</label>
+                    <input type="text" id="event-title" name="title" required>
+                </div>
+                <div class="form-row">
+                    <label for="event-date">Event Date:</label>
+                    <input type="date" id="event-date" name="date" required>
+                </div>
+                <div class="form-group">
+                    <label for="event-message">Message</label>
+                    <textarea id="event-message" name="message" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Target Audience</label>
+                    <div class="checkbox-group">
+                        <label><input type="radio" name="audience" value="all" checked> All Users</label>
+                        <label><input type="radio" name="audience" value="interests"> By Interest</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label><input type="checkbox" id="notify-all" checked> Notify All</label>
+                </div>
+                <div id="interests-container" class="form-group" style="display: none;">
+                    <label>Select Interests</label>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="interests" value="festival"> Festivals</label>
+                        <label><input type="checkbox" name="interests" value="kirtan"> Kirtan</label>
+                        <label><input type="checkbox" name="interests" value="bhagavad-gita"> Bhagavad Gita</label>
+                        <label><input type="checkbox" name="interests" value="philosophy"> Philosophy</label>
+                        <label><input type="checkbox" name="interests" value="prasadam"> Prasadam</label>
+                    </div>
+                </div>
+                <button type="submit" class="btn-primary">Send Notification</button>
+            </form>
+            <div class="direct-notification">
+                <button id="direct-notify-btn" class="btn-primary btn-large">
+                    <i class="fas fa-paper-plane"></i> Send Direct Notification
+                </button>
+                <p class="helper-text">Click to instantly notify users without using terminal commands</p>
+            </div>
+            <style>
+                .direct-notification {
+                    margin-top: 20px;
+                    text-align: center;
+                    padding: 15px;
+                    background-color: #f8f9fa;
+                    border-radius: 8px;
+                }
+                .btn-large {
+                    padding: 12px 24px;
+                    font-size: 1.1rem;
+                    margin: 10px 0;
+                }
+                .helper-text {
+                    font-size: 0.9rem;
+                    color: #6c757d;
+                    margin-top: 5px;
+                }
+            </style>
+        </section>
+
+        <section id="matches-section" class="matches container hidden">
+            <h2>Events Matching Your Interests</h2>
+            <p>These events are personalized based on your selected interests.</p>
+            <div id="matches-container" class="events-grid">
+                <!-- Matched events will be loaded here dynamically -->
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>Loading matched events...</p>
+                </div>
+            </div>
+            
+            <h2 class="recommendations-title">Recommended for You</h2>
+            <p>Events we think you might enjoy based on your interests.</p>
+            <div id="recommendations-container" class="events-grid">
+                <!-- Recommendations will be loaded here dynamically -->
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>Loading recommendations...</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="about-section" class="about container hidden">
+            <h2>About ISKCON Event Notification System</h2>
+            <p>The ISKCON Event Notification System is designed to keep devotees and interested individuals informed about upcoming events, festivals, kirtans, and other activities at ISKCON centers.</p>
+            <p>Our system matches events with user interests to provide personalized notifications, ensuring you never miss an event that aligns with your spiritual journey.</p>
+            <div class="about-cards">
+                <div class="about-card">
+                    <i class="fas fa-bell"></i>
+                    <h3>Personalized Notifications</h3>
+                    <p>Receive notifications tailored to your specific interests</p>
+                </div>
+                <div class="about-card">
+                    <i class="fas fa-calendar-alt"></i>
+                    <h3>Event Calendar</h3>
+                    <p>Browse upcoming events by date and category</p>
+                </div>
+                <div class="about-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Community Connection</h3>
+                    <p>Stay connected with the ISKCON community</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 ISKCON Event Notification System. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Templates -->
+    <template id="event-card-template">
+        <div class="event-card">
+            <div class="event-date"></div>
+            <h3 class="event-title"></h3>
+            <p class="event-description"></p>
+            <span class="event-category"></span>
+            <a href="#" class="event-link">Learn More</a>
+        </div>
+    </template>
+
+    <script src="js/main.js"></script>
+    <script src="js/matches.js"></script>
+</body>
+</html>

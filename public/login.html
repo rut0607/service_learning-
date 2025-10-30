@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - ISKCON Event Notification System</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .auth-container {
+            max-width: 500px;
+            margin: 2rem auto;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+        }
+        
+        .auth-container h2 {
+            margin-bottom: 1.5rem;
+            text-align: center;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        .auth-form .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .auth-form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+        
+        .auth-form input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .auth-form input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.25);
+            outline: none;
+        }
+        
+        .auth-form button {
+            width: 100%;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .auth-form button:hover {
+            background-color: var(--accent-color);
+            color: var(--dark-color);
+            transform: translateY(-2px);
+        }
+        
+        .auth-links {
+            margin-top: 1.5rem;
+            text-align: center;
+        }
+        
+        .auth-links a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .auth-links a:hover {
+            color: var(--accent-color);
+        }
+        
+        .auth-message {
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            display: none; /* Hidden by default */
+        }
+        
+        .auth-message.error {
+            background-color: #fff8f8;
+            border: 1px solid #dc3545;
+            color: #dc3545;
+            display: block;
+        }
+        
+        .auth-message.success {
+            background-color: #f1f9f7;
+            border: 1px solid #28a745;
+            color: #28a745;
+            display: block;
+        }
+        
+        .auth-message.hidden {
+            display: none;
+        }
+        
+        .form-error {
+            color: #dc3545;
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="images/iskcon-logo.svg" alt="ISKCON Logo">
+                <h1>ISKCON Events</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-calendar-alt"></i> Events</a></li>
+                    <li><a href="index.html#matches-section"><i class="fas fa-heart"></i> My Matches</a></li>
+                    <li><a href="index.html#subscribe-section"><i class="fas fa-bell"></i> Subscribe</a></li>
+                    <li><a href="index.html#about-section"><i class="fas fa-info-circle"></i> About</a></li>
+                    <li><a href="login.html" class="active"><i class="fas fa-user"></i> Login</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-menu-btn" id="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <div class="auth-container">
+            <h2>Login to Your Account</h2>
+            <div id="auth-message" class="auth-message hidden"></div>
+            <form id="login-form" class="auth-form">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                    <div id="email-error" class="form-error"></div>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                    <div id="password-error" class="form-error"></div>
+                </div>
+                <button type="submit">Login</button>
+            </form>
+            <div class="auth-links">
+                <a href="#">Forgot Password?</a> | <a href="register.html">Create an Account</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 ISKCON Event Notification System. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const mobileMenuBtn = document.getElementById('mobile-menu');
+            const navLinks = document.querySelector('nav ul');
+            
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    navLinks.classList.toggle('active');
+                });
+            }
+            
+            // Login form submission
+            const loginForm = document.getElementById('login-form');
+            const authMessage = document.getElementById('auth-message');
+            const emailError = document.getElementById('email-error');
+            const passwordError = document.getElementById('password-error');
+            
+            // Function to validate email
+            function validateEmail(email) {
+                const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                return re.test(String(email).toLowerCase());
+            }
+            
+            // Function to show field error
+            function showFieldError(element, message) {
+                element.textContent = message;
+                element.style.display = 'block';
+            }
+            
+            // Function to hide field error
+            function hideFieldError(element) {
+                element.textContent = '';
+                element.style.display = 'none';
+            }
+            
+            // Function to show message
+            function showMessage(message, type) {
+                authMessage.textContent = message;
+                authMessage.className = 'auth-message ' + type;
+                authMessage.style.display = 'block';
+                
+                // Hide message after 5 seconds
+                setTimeout(() => {
+                    authMessage.className = 'auth-message hidden';
+                    authMessage.style.display = 'none';
+                }, 5000);
+            }
+            
+            if (loginForm) {
+                loginForm.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    
+                    // Reset errors
+                    hideFieldError(emailError);
+                    hideFieldError(passwordError);
+                    authMessage.style.display = 'none';
+                    
+                    // Get form data
+                    const email = document.getElementById('email').value.trim();
+                    const password = document.getElementById('password').value;
+                    
+                    // Validate email
+                    if (!email) {
+                        showFieldError(emailError, 'Email is required');
+                        return;
+                    } else if (!validateEmail(email)) {
+                        showFieldError(emailError, 'Please enter a valid email address');
+                        return;
+                    }
+                    
+                    // Validate password
+                    if (!password) {
+                        showFieldError(passwordError, 'Password is required');
+                        return;
+                    }
+                    
+                    try {
+                        // Show loading state
+                        const submitBtn = this.querySelector('button[type="submit"]');
+                        const originalBtnText = submitBtn.textContent;
+                        submitBtn.textContent = 'Logging in...';
+                        submitBtn.disabled = true;
+                        
+                        // Send login request
+                        const response = await fetch('/api/auth/login', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ email, password })
+                        });
+                        
+                        const data = await response.json();
+                        
+                        if (response.ok) {
+                            // Show success message
+                            showMessage('Login successful! Redirecting...', 'success');
+                            
+                            // Store token in localStorage
+                            localStorage.setItem('token', data.token);
+                            
+                            // Redirect to home page after a short delay
+                            setTimeout(() => {
+                                window.location.href = 'index.html';
+                            }, 1500);
+                        } else {
+                            // Show specific error message based on the response
+                            if (data.errors && data.errors.length > 0) {
+                                // Display validation errors
+                                const errorMessages = data.errors.map(err => err.msg).join('<br>');
+                                authMessage.innerHTML = errorMessages;
+                                authMessage.className = 'auth-message error';
+                                authMessage.style.display = 'block';
+                            } else if (data.message) {
+                                // Display server error message
+                                showMessage(data.message, 'error');
+                            } else {
+                                // Generic error message
+                                showMessage('Invalid email or password. Please try again.', 'error');
+                            }
+                            
+                            // Reset button
+                            submitBtn.textContent = originalBtnText;
+                            submitBtn.disabled = false;
+                        }
+                    } catch (error) {
+                        console.error('Login error:', error);
+                        
+                        // Show error message
+                        showMessage('Network error. Please check your connection and try again.', 'error');
+                        
+                        // Reset button
+                        const submitBtn = this.querySelector('button[type="submit"]');
+                        submitBtn.textContent = 'Login';
+                        submitBtn.disabled = false;
+                    }
+                });
+                
+                // Add input event listeners for real-time validation
+                document.getElementById('email').addEventListener('input', function() {
+                    if (this.value.trim()) {
+                        if (!validateEmail(this.value.trim())) {
+                            showFieldError(emailError, 'Please enter a valid email address');
+                        } else {
+                            hideFieldError(emailError);
+                        }
+                    } else {
+                        hideFieldError(emailError);
+                    }
+                });
+                
+                document.getElementById('password').addEventListener('input', function() {
+                    hideFieldError(passwordError);
+                });
+            }
+        });
+    </script>
+</body>
+</html>

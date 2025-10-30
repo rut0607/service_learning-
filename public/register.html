@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - ISKCON Event Notification System</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .auth-container {
+            max-width: 500px;
+            margin: 2rem auto;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: var(--box-shadow);
+            padding: 2rem;
+        }
+        
+        .auth-container h2 {
+            margin-bottom: 1.5rem;
+            text-align: center;
+            color: var(--dark-color);
+        }
+        
+        .auth-form .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .auth-form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .auth-form input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .auth-form button {
+            width: 100%;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .auth-form button:hover {
+            background-color: var(--accent-color);
+        }
+        
+        .auth-links {
+            margin-top: 1.5rem;
+            text-align: center;
+        }
+        
+        .auth-links a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .auth-links a:hover {
+            text-decoration: underline;
+        }
+        
+        .auth-message {
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border-radius: 4px;
+            text-align: center;
+            display: none; /* Hidden by default */
+        }
+        
+        .auth-message.error {
+            background-color: #fff8f8;
+            border: 1px solid var(--danger-color);
+            color: var(--danger-color);
+            display: block;
+        }
+        
+        .auth-message.success {
+            background-color: #f1f9f7;
+            border: 1px solid var(--success-color);
+            color: var(--success-color);
+            display: block;
+        }
+        
+        .auth-message.hidden {
+            display: none;
+        }
+        
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            font-weight: normal;
+            margin-bottom: 0;
+        }
+        
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+            margin-right: 0.5rem;
+        }
+        
+        .form-error {
+            color: #dc3545;
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="images/iskcon-logo.svg" alt="ISKCON Logo">
+                <h1>ISKCON Event Notification System</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Events</a></li>
+                    <li><a href="index.html#matches-section">My Matches</a></li>
+                    <li><a href="index.html#subscribe-section">Subscribe</a></li>
+                    <li><a href="index.html#about-section">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="auth-container">
+            <h2>Register</h2>
+            <div id="auth-message" class="auth-message" style="display: none;"></div>
+            <form id="register-form" class="auth-form">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+                    <div id="name-error" class="form-error"></div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                    <div id="email-error" class="form-error"></div>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                    <div id="password-error" class="form-error"></div>
+                </div>
+                <div class="form-group">
+                    <label>Interests</label>
+                    <div class="checkbox-group">
+                        <label>
+                            <input type="checkbox" name="interests" value="festival">
+                            Festivals
+                        </label>
+                        <label>
+                            <input type="checkbox" name="interests" value="kirtan">
+                            Kirtan
+                        </label>
+                        <label>
+                            <input type="checkbox" name="interests" value="bhagavad-gita">
+                            Bhagavad Gita
+                        </label>
+                        <label>
+                            <input type="checkbox" name="interests" value="philosophy">
+                            Philosophy
+                        </label>
+                        <label>
+                            <input type="checkbox" name="interests" value="prasadam">
+                            Prasadam
+                        </label>
+                        <label>
+                            <input type="checkbox" name="interests" value="yoga">
+                            Yoga
+                        </label>
+                        <label>
+                            <input type="checkbox" name="interests" value="meditation">
+                            Meditation
+                        </label>
+                        <label>
+                            <input type="checkbox" name="interests" value="service">
+                            Service
+                        </label>
+                    </div>
+                </div>
+                <button type="submit">Register</button>
+            </form>
+            <div class="auth-links">
+                <p>Already have an account? <a href="login.html">Login</a></p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 ISKCON Event Notification System. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const registerForm = document.getElementById('register-form');
+            const nameError = document.getElementById('name-error');
+            const emailError = document.getElementById('email-error');
+            const passwordError = document.getElementById('password-error');
+            const authMessage = document.getElementById('auth-message');
+            
+            // Function to validate email
+            function validateEmail(email) {
+                const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                return re.test(String(email).toLowerCase());
+            }
+            
+            // Function to show field error
+            function showFieldError(element, message) {
+                element.textContent = message;
+                element.style.display = 'block';
+            }
+            
+            // Function to hide field error
+            function hideFieldError(element) {
+                element.textContent = '';
+                element.style.display = 'none';
+            }
+            
+            // Function to show message
+            function showMessage(message, type) {
+                authMessage.textContent = message;
+                authMessage.className = 'auth-message ' + type;
+                authMessage.style.display = 'block';
+            }
+            
+            if (registerForm) {
+                registerForm.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    
+                    // Reset errors
+                    hideFieldError(nameError);
+                    hideFieldError(emailError);
+                    hideFieldError(passwordError);
+                    authMessage.style.display = 'none';
+                    
+                    // Get form data
+                    const name = document.getElementById('name').value.trim();
+                    const email = document.getElementById('email').value.trim();
+                    const password = document.getElementById('password').value;
+                    
+                    // Get selected interests
+                    const interestCheckboxes = document.querySelectorAll('input[name="interests"]:checked');
+                    const interests = Array.from(interestCheckboxes).map(cb => cb.value);
+                    
+                    // Validate name
+                    if (!name) {
+                        showFieldError(nameError, 'Name is required');
+                        return;
+                    }
+                    
+                    // Validate email
+                    if (!email) {
+                        showFieldError(emailError, 'Email is required');
+                        return;
+                    } else if (!validateEmail(email)) {
+                        showFieldError(emailError, 'Please enter a valid email address');
+                        return;
+                    }
+                    
+                    // Validate password
+                    if (!password) {
+                        showFieldError(passwordError, 'Password is required');
+                        return;
+                    } else if (password.length < 6) {
+                        showFieldError(passwordError, 'Password must be at least 6 characters');
+                        return;
+                    }
+                    
+                    try {
+                        // Show loading state
+                        const submitBtn = this.querySelector('button[type="submit"]');
+                        const originalBtnText = submitBtn.textContent;
+                        submitBtn.textContent = 'Registering...';
+                        submitBtn.disabled = true;
+                        
+                        // Send registration request
+                        const response = await fetch('/api/auth/register', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ name, email, password, interests })
+                        });
+                        
+                        const data = await response.json();
+                        
+                        if (response.ok) {
+                            // Show success message
+                            showMessage('Registration successful! Redirecting to login...', 'success');
+                            
+                            // Redirect to login page after a short delay
+                            setTimeout(() => {
+                                window.location.href = 'login.html';
+                            }, 2000);
+                        } else {
+                            // Show specific error message based on the response
+                            if (data.errors && data.errors.length > 0) {
+                                // Display validation errors
+                                const errorMessages = data.errors.map(err => err.msg).join('<br>');
+                                authMessage.innerHTML = errorMessages;
+                                authMessage.className = 'auth-message error';
+                                authMessage.style.display = 'block';
+                            } else if (data.message) {
+                                // Display server error message
+                                showMessage(data.message, 'error');
+                            } else {
+                                // Generic error message
+                                showMessage('Registration failed. Please try again.', 'error');
+                            }
+                            
+                            // Reset button
+                            submitBtn.textContent = originalBtnText;
+                            submitBtn.disabled = false;
+                        }
+                    } catch (error) {
+                        console.error('Registration error:', error);
+                        
+                        // Show error message
+                        showMessage('Network error. Please check your connection and try again.', 'error');
+                        
+                        // Reset button
+                        const submitBtn = this.querySelector('button[type="submit"]');
+                        submitBtn.textContent = 'Register';
+                        submitBtn.disabled = false;
+                    }
+                });
+                
+                // Add input event listeners for real-time validation
+                document.getElementById('name').addEventListener('input', function() {
+                    hideFieldError(nameError);
+                });
+                
+                document.getElementById('email').addEventListener('input', function() {
+                    if (this.value.trim()) {
+                        if (!validateEmail(this.value.trim())) {
+                            showFieldError(emailError, 'Please enter a valid email address');
+                        } else {
+                            hideFieldError(emailError);
+                        }
+                    } else {
+                        hideFieldError(emailError);
+                    }
+                });
+                
+                document.getElementById('password').addEventListener('input', function() {
+                    if (this.value && this.value.length < 6) {
+                        showFieldError(passwordError, 'Password must be at least 6 characters');
+                    } else {
+                        hideFieldError(passwordError);
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
